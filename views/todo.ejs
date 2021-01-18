@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <script src="https://kit.fontawesome.com/a5a7a79d9a.js" crossorigin="anonymous"></script>
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" > </script> 
+    <link rel="icon" type="image/x-icon" href="/images/home-icon.png" sizes="">
+    <link rel="stylesheet" type="text/css" href="/css/todo.css">
+</head>
+<body>
+    <!-- container -->
+    <div class="container">
+        <h1 class="heading center">ToDo App</h1>
+        <form action="/create" method="post" class="form-user" id="new-list-form">
+            <div class="txtarea">
+                <p>Description</p>
+                <textarea name="todo" placeholder="What do you need to do?" required class="descript"></textarea>
+            </div>
+            <!-- drop-down menu -->
+            <div class="category-calender mb-45">
+                <div class="category">
+                    <p>Category</p>
+                    <select required class="drop-menu" name="category">
+                        <option value="">Choose a Category</option>
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="school">School</option>
+                        <option value="clean">Cleaning</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                </div>
+                <!-- calender to add date -->
+                <div class="calender">
+                    <p>Due Date</p>
+                    <input type="date" id="due-date"  placeholder="dd/mm/yyyy" class="drop-menu" required name="date"> 
+                </div>
+            </div>
+            <div class="btns">
+                <!-- to add task -->
+                <button type="submit" class="bck-color-dark" id="add-task">
+                   <div>
+                       <i class="fas fa-plus"></i>
+                    </div>
+                         Add Task
+                </button>
+
+            </div>
+
+        </form>
+        <!-- to display list and for deleting routes -->
+        <form action="/delete" method="get" id="delete-lists-form">
+            
+            <ul class="outside-list">
+
+                <% for(let i of app_list) { %>
+                    <li id="list-<%= i._id%>">
+                        <input type="checkbox" name="<%=i._id%>">
+                        <div class="task-details">
+                            <span style="color:rgb(250, 243, 243);"> <%= i.Todo %> </span>
+                            <p style="color:rgb(245, 241, 241);"> <%= i.Date %> </p>
+                        </div>
+                        <div class="category-list bck-color-<%= i.cat %>">
+                            <div style="margin-top: 8px;"> <%= i.Category %></div>
+                        </div>
+                    </li>
+                <% } %>
+
+            </ul>
+            <!-- delete task buttons -->
+            <div class="btns">
+                <button type="submit" class="bck-color-red btns" id="delete-task">
+                    <div>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    Delete Task
+                </button>
+            </div>
+    </form>
+    </div>
+
+<script type="text/javascript" src="/js/todo.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
